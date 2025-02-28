@@ -160,3 +160,16 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+#Compile files
+Makefile
+cmake*
+CMakeFiles/
+CMake*
+lib/
+config.h
+*.cmake
+freeglut.pc
+*.so
+glbinding*
+libtinyxml.a

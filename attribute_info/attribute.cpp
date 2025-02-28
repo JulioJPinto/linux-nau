@@ -4,14 +4,18 @@
 #include <string>
 #include <stdio.h>
 
+#if defined(_WIN32) && defined(_DEBUG)
 #include <windows.h>
 #include <DbgHelp.h>
 #pragma comment(lib,"Dbghelp")
+#endif
 
 #define _CRTDBG_MAP_ALLOC
 #define _CRTDBG_MAP_ALLOC_NEW
 #include <stdlib.h>
+#if defined(_WIN32)
 #include <crtdbg.h>
+#endif
 
 #ifdef _DEBUG
 #ifndef DBG_NEW

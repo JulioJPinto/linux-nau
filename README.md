@@ -1,4 +1,8 @@
-Nau
+### Linux-Nau
+
+This is my personal version of the Nau 3D engine with all the changes necessary to work for Linux out of the box.
+In this repository I will also keep the shaders I developed while using this software divided class by class.
+
 ===
 
 Nau 3D engine: OpenGL + Optix 7 (WIP) + Lua + ImGui 
