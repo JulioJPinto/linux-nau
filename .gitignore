@@ -173,3 +173,4 @@ freeglut.pc
 *.so
 glbinding*
 libtinyxml.a
+.vscode
