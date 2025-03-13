@@ -1,0 +1,59 @@
+<project name="Base" width="1024" height="1024" >
+
+    <assets>
+		<attributes>
+			<attribute name="eta" type="COLOR" data="FLOAT" value="1.1" />						
+			<attribute name="alpha" type="COLOR" data="FLOAT" value="0.5" />
+			<attribute name="dot" type="COLOR" data="BOOL" value="false" />
+		</attributes>
+
+        <scenes>
+            <scene name="SkyBox" >
+                <geometry name="skyBox" material="skybox" type="BOX" >
+                    <SCALE x="10" y="10" z="10" />
+                </geometry>
+            </scene>
+            <scene name="teapot" filename="Teapot.3ds" param="UNITIZE SWAP_YZ">
+            
+            </scene>
+        </scenes>
+
+        <cameras>
+            <camera name="mainC" >
+                <POSITION x="0" y="0" z="5" />
+                <VIEW x="0" y="0" z="-1" />
+            </camera>
+        </cameras>
+
+        <materialLibs>
+            <materialLib filename="base.mlib" />
+        </materialLibs>
+    </assets>
+
+    <pipelines>
+        <pipeline name = "basePip" >
+            <pass class="default" name="passPip" >
+                <scenes>
+                    <scene name="SkyBox" />
+                    <scene name="teapot" />
+                </scenes>
+                <camera name = "mainC" />
+                <materialMaps>
+                    <map fromMaterial="skybox"
+                        toMaterial="skybox" toLibrary="base" />
+                    <map fromMaterial="Default"
+                        toMaterial="cm" toLibrary="base" />
+                </materialMaps>
+            </pass>
+        </pipeline>
+    </pipelines>
+    
+    <interface>
+		<window label="Main Window">
+			<var label="Alpha" type="COLOR" context="base::cm" component="alpha" def="min=0 max=1 step=0.01"/>
+			<var label="Dot modulation" type="COLOR" context="base::cm" component="dot"  />
+			<var label="eta" type="COLOR" context="base::cm" component="eta" def="min=0 max=2 step=0.01"/>
+        </window>
+    </interface>
+    
+</project>
