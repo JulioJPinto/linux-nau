@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<project name="Normal Mapping - Instanced" width="512" height="512">
+	<assets>
+		<scenes>
+			<scene name="Barrel" param="UNITIZE">
+				<TRANSLATE x="0" y="1" z= "0" />
+				<file name="../metal_barrel/metal_barrel.obj"/>
+			</scene>
+			<scene name="Plane" >
+				<SCALE x="200" y="200" z="200" />
+				<file name="../models/plane.obj"/>
+			</scene>
+		</scenes>
+		
+		<viewports>
+			<viewport name="MainViewport">
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
+			</viewport>
+		</viewports>
+		
+		<cameras>
+			<camera name="MainCamera" >
+				<viewport name="MainViewport" />
+				<TYPE value="PERSPECTIVE"/>
+                <POSITION x="5.196" y="1.503" z="-0.128" w="1" />
+                <VIEW x="-0.970" y="-0.229" z="0.079" w="0" />
+                <!--POSITION x="150" y="12.6437" z="67.9942" w="1" />
+                <VIEW x="-0.977805" y="-0.209222" z="0.0111561" w="0" /-->
+				<NEAR value="0.1" />
+			</camera>
+            <camera name="cam1">
+                <ELEVATION_ANGLE value="-0.310779" />
+                <POSITION x="67.9942" y="12.6437" z="148" w="1" />
+                <ZX_ANGLE value="3.14159" />
+                <viewport name="MainViewport" />
+            </camera>
+            <camera name="cam2">
+                <ELEVATION_ANGLE value="-0.310779" />
+                <ZX_ANGLE value="0" />
+                <POSITION x="67.9942" y="12.6437" z="-14" w="1" />
+                <viewport name="MainViewport" />
+            </camera>
+            <camera name="cam3">
+                <ELEVATION_ANGLE value="-0.310779" />
+                <ZX_ANGLE value="1.570795" />
+                <POSITION x="-14" y="12.6437" z="67.9942" w="1" />
+                <viewport name="MainViewport" />
+            </camera>
+            <camera name="cam4">
+                <ELEVATION_ANGLE value="-0.310779" />
+                <POSITION x="148" y="12.6437" z="67.9942" w="1" />
+                <ZX_ANGLE value="-1.570795" />
+                <viewport name="MainViewport" />
+            </camera>
+		</cameras>
+		
+		<lights>
+			<light name="Sun">
+				<DIRECTION x="-2" y="-2" z="-2" />
+			</light>
+		</lights>
+		
+		<materialLibs>
+			<materialLib filename="texture.mlib" />
+		</materialLibs>
+	</assets>
+	
+	<pipelines>
+	
+		<pipeline name="Barrel" defaultCamera="MainCamera">
+
+			<pass class="default" name="plane" >
+				<scenes>
+					<scene name="Plane" />
+				</scenes>
+				<camera name="MainCamera" />
+				<lights>
+					<light name="Sun" />
+				</lights>
+			</pass>
+			
+			<pass class="default" name="barrels" defaultCamera="MainCamera">
+                <!-- <COLOR_CLEAR value="false" /> -->
+				<scenes instances = "30000">
+					<scene name="Barrel" />
+				</scenes>
+				<camera name="MainCamera" />
+				<lights>
+					<light name="Sun" />
+				</lights>
+				<materialMaps>
+					<map fromMaterial="DefaultOBJMaterial" toMaterial="gBuffer" toLibrary="Texture" />
+				</materialMaps>
+				<renderTarget name="gBuffer" fromLibrary="Texture" />
+				<viewport name="MainViewport" />
+
+			</pass>
+           
+            <pass class="quad" name="barrels_def" >
+               <COLOR_CLEAR value="false" />
+               <viewport name="MainViewport" />
+               <material name = "deferred" fromLibrary="Texture" />
+               <!-- <renderTarget name="color" fromLibrary="Texture" /> -->
+           </pass>
+
+		   <!--
+
+           <pass class="quad" name="resolve" >
+            <COLOR_CLEAR value="false" />
+            <viewport name="MainViewport" />
+            <material name = "resolve" fromLibrary="Texture" />
+        
+        </pass-->
+
+       </pipeline>
+		
+		
+	</pipelines>
+</project>

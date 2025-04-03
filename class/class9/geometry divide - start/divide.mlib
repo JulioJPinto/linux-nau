@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<materialLib name="Geometry">
+
+
+	<shaders>
+		<shader name="divide" 		ps="shaders/simple.frag"
+									gs="shaders/divide.geom" 
+									vs="shaders/simple.vert" />
+	</shaders>
+
+	<materials>
+		<material name="divide">
+			<shader name="divide">
+				<values>
+					<valueof uniform="PVM"  type="RENDERER"  
+											component="PROJECTION_VIEW_MODEL" />
+
+				</values>
+			</shader>
+		</material>
+	</materials>
+</materialLib>
